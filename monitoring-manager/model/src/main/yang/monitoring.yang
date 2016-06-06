@@ -1,0 +1,35 @@
+module monitoring {
+    yang-version 1;
+    namespace "urn:eu:virtuwind:monitoring";
+    prefix acl;
+
+    import opendaylight-inventory {prefix inv; revision-date 2013-08-19;}
+    import yang-ext {prefix ext; revision-date "2013-07-09";}
+    import ietf-yang-types { prefix yang; revision-date 2010-09-24; }
+    import ietf-inet-types { prefix inet; }
+    description "Monitoring Manager configuration";
+
+    revision "2015-07-22" {
+        description "Initial version.";
+    }
+
+
+    notification topologyChanged {
+          leaf topologyChange {
+            type enumeration {
+              enum "linkFailed" {
+                value 0;
+                description "The link failed.";
+              }
+              enum "linkOverloaded" {
+                value 1;
+                description
+                  "The link was overloaded.";
+              }
+            }
+          }
+          leaf linkId {
+            type string;
+          }
+    }  // notification shapeDone
+}

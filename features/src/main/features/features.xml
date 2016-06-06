@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features name="virtuwind-features-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+    <repository>mvn:org.opendaylight.controller/features-mdsal/${feature.mdsal.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/features-restconf/${feature.restconf.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/features-netconf-connector/${feature.netconf.connector.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/${feature.openflowplugin.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.yangtools/features-yangtools/${yangtools.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.mdsal.model/features-mdsal-model/${maven-sal-api-gen-plugin.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.dlux/features-dlux/${feature.dlux.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.l2switch/features-l2switch/${feature.l2switch.version}/xml/features</repository>
+
+    <feature name='virtuwind-reference-model' description='VirtuWind :: OpenDaylight :: Reference Monitor API' version='${project.version}'>
+        <feature version="${maven-sal-api-gen-plugin.version}">odl-mdsal-models</feature>
+        <bundle>mvn:eu.virtuwind/reference-model/${reference.version}</bundle>
+    </feature>
+
+    <feature name='virtuwind-reference-impl' description='VirtuWind :: OpenDaylight :: Reference Monitor' version='${project.version}'>
+        <feature version="${feature.openflowplugin.version}">odl-openflowplugin-southbound</feature>
+        <feature version="${feature.openflowplugin.version}">odl-openflowplugin-flow-services</feature>
+        <feature version="${feature.mdsal.version}">odl-mdsal-broker</feature>
+        <feature version="${project.version}">virtuwind-reference-model</feature>
+        <bundle>mvn:eu.virtuwind/reference-impl/${reference.version}</bundle>
+        <configfile finalname="etc/opendaylight/karaf/${reference.configfile}">mvn:eu.virtuwind/reference-config/${reference.version}/xml/config</configfile>
+    </feature>
+
+    <feature name='virtuwind-monitoring-model' description='VirtuWind :: OpenDaylight :: Monitoring Manager API' version='${project.version}'>
+        <feature version="${maven-sal-api-gen-plugin.version}">odl-mdsal-models</feature>
+        <bundle>mvn:eu.virtuwind/monitoring-model/${monitoring.version}</bundle>
+    </feature>
+
+    <feature name='virtuwind-monitoring-impl' description='VirtuWind :: OpenDaylight :: Monitoring Manager' version='${project.version}'>
+        <feature version="${feature.openflowplugin.version}">odl-openflowplugin-southbound</feature>
+        <feature version="${feature.openflowplugin.version}">odl-openflowplugin-flow-services</feature>
+        <feature version="${feature.l2switch.version}">odl-l2switch-hosttracker</feature>
+        <feature version="${feature.mdsal.version}">odl-mdsal-broker</feature>
+        <feature version="${project.version}">virtuwind-monitoring-model</feature>
+        <bundle>mvn:eu.virtuwind/monitoring-impl/${monitoring.version}</bundle>
+        <configfile finalname="etc/opendaylight/karaf/${monitoring.configfile}">mvn:eu.virtuwind/monitoring-config/${monitoring.version}/xml/config</configfile>
+    </feature>
+
+    <feature name='virtuwind-negotiator-model' description='VirtuWind :: OpenDaylight :: QoS Negotiator API' version='${project.version}'>
+        <feature version="${maven-sal-api-gen-plugin.version}">odl-mdsal-models</feature>
+        <bundle>mvn:eu.virtuwind/negotiator-model/${negotiator.version}</bundle>
+    </feature>
+
+    <feature name='virtuwind-negotiator-impl' description='VirtuWind :: OpenDaylight :: QoS Negotiator' version='${project.version}'>
+        <feature version="${feature.openflowplugin.version}">odl-openflowplugin-southbound</feature>
+        <feature version="${feature.openflowplugin.version}">odl-openflowplugin-flow-services</feature>
+        <feature version="${feature.mdsal.version}">odl-mdsal-broker</feature>
+        <feature version="${project.version}">virtuwind-negotiator-model</feature>
+        <feature version="${project.version}">virtuwind-monitoring-impl</feature>
+        <bundle>mvn:eu.virtuwind/negotiator-impl/${negotiator.version}</bundle>
+        <configfile finalname="etc/opendaylight/karaf/${negotiator.configfile}">mvn:eu.virtuwind/negotiator-config/${negotiator.version}/xml/config</configfile>
+    </feature>
+
+    <feature name='virtuwind-rest' version='${project.version}' description='VirtuWind :: OpenDaylight :: REST'>
+    	<feature version="${project.version}">virtuwind-reference-impl</feature>
+        <feature version="${project.version}">virtuwind-negotiator-impl</feature>
+        <feature version="${project.version}">virtuwind-monitoring-impl</feature>
+    	<feature version="${feature.restconf.version}">odl-restconf</feature>
+    </feature>
+    <feature name='virtuwind-ui' version='${project.version}' description='VirtuWind :: OpenDaylight :: UI'>
+    	<feature version="${project.version}">virtuwind-rest</feature>
+    	<feature version="${feature.restconf.version}">odl-mdsal-apidocs</feature>
+    	<feature version="${feature.mdsal.version}">odl-mdsal-xsql</feature>
+    	<feature version="${feature.dlux.version}">odl-dlux-yangui</feature>
+     </feature>
+</features>

@@ -1,0 +1,73 @@
+module reference {
+    yang-version 1;
+    namespace "urn:eu:virtuwind:reference";
+    prefix acl;
+
+    import opendaylight-inventory {prefix inv; revision-date 2013-08-19;}
+    import yang-ext {prefix ext; revision-date "2013-07-09";}
+    import ietf-yang-types { prefix yang; revision-date 2010-09-24; }
+    import ietf-inet-types { prefix inet; }
+    description "Reference Monitor configuration";
+
+    revision "2015-07-22" {
+        description "Initial version.";
+    }
+
+    rpc addApplication {
+            input {
+                leaf appId {
+                    type int32;
+                }
+                leaf bandwidth {
+                    type decimal64{
+                        fraction-digits 4;
+                    }
+                }
+                leaf packetLoss {
+                    type decimal64{
+                        fraction-digits 4;
+                    }
+                }
+                leaf packetDelay {
+                    type decimal64{
+                        fraction-digits 4;
+                    }
+                }
+                leaf jitter {
+                    type decimal64{
+                        fraction-digits 4;
+                    }
+                }
+            }
+        }
+
+        container application-registry {
+                list application-registry-entry {
+                    key "appId";
+
+                    leaf appId {
+                        type int32;
+                    }
+                    leaf packetLoss {
+                        type decimal64{
+                            fraction-digits 4;
+                        }
+                    }
+                    leaf packetDelay {
+                        type decimal64{
+                            fraction-digits 4;
+                        }
+                    }
+                    leaf jitter {
+                        type decimal64{
+                            fraction-digits 4;
+                        }
+                    }
+                    leaf bandwidth {
+                    	type decimal64{
+                        	fraction-digits 4;
+                    }
+                }
+            }
+        }
+}
