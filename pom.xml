@@ -12,7 +12,7 @@
   <artifactId>virtuwind-test</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>VirtuWind project</name>
+  <name>Example VirtuWind project</name>
   <modules>
       <module>commons/parent</module>  
       <module>reference-monitor</module>

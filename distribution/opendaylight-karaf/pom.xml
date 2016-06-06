@@ -13,7 +13,7 @@
   <artifactId>packaging</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>VirtuWind Karaf Distribution Packaging</name>
+  <name>Example VirtuWind Karaf Distribution Packaging</name>
   <prerequisites>
     <maven>3.2</maven>
   </prerequisites>
