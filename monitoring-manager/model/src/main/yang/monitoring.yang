@@ -1,7 +1,7 @@
 module monitoring {
     yang-version 1;
     namespace "urn:eu:virtuwind:monitoring";
-    prefix acl;
+    prefix monitoring;
 
     import opendaylight-inventory {prefix inv; revision-date 2013-08-19;}
     import yang-ext {prefix ext; revision-date "2013-07-09";}
@@ -31,5 +31,5 @@ module monitoring {
           leaf linkId {
             type string;
           }
-    }  // notification shapeDone
+    }  // notification topologyChanged
 }
